@@ -119,7 +119,7 @@ namespace THECAOTOOL {
             DataTable dt = new DataTable();
             con.Open();
             try {
-                SqlDataAdapter da = new SqlDataAdapter("Select DISTINCT  MAIN.NAME,MAIN.ID From MAIN",con);
+                SqlDataAdapter da = new SqlDataAdapter("Select DISTINCT  MAIN.NAME From MAIN",con);
                 da.Fill(dt);
 
             } catch (Exception ex) {
@@ -131,7 +131,7 @@ namespace THECAOTOOL {
             try {
                 cbeName.DataSource = dt;
                 cbeName.DisplayMember = "NAME";
-                cbeName.ValueMember = "ID";
+    
             } catch (Exception ex) {
                 MessageBox.Show("Có lỗi khi load dữ liệu!\n",ex.ToString());
             }
@@ -169,7 +169,12 @@ namespace THECAOTOOL {
                 handleImportExport(false);
             } else {
                 handleImportExport(true);
+                loadDataValue();
+                loadManufacturer();
+                loadStatus();
+                loadName();
             }
+          
         }
         void handleImportExport(bool status) {
             btnExport.Enabled = status;
@@ -288,7 +293,9 @@ namespace THECAOTOOL {
                 cbeStatus.Enabled = true;
             } else {
                 cbeStatus.Enabled = false;
+
             }
+           
         }
 
         private void CHangSanXuat_CheckedChanged(object sender,EventArgs e) {
